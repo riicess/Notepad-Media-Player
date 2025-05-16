@@ -1,8 +1,6 @@
 # Notepad Player: See Videos & Images in Notepad!
 
-Ever thought your trusty Windows Notepad could play videos or show pictures? Well, with this script, it kind of can! This program turns your videos and images into text-art and displays them right inside Notepad, creating a fun, retro, blocky effect.
-
-Think of it as a quirky art project, not a replacement for your actual media player!
+Ever thought your trusty Windows Notepad could play videos or show pictures? Well, with this script, it kind of can! This program turns your videos and images into text-art and displays them right inside Notepad
 
 ## What's Cool About It?
 
