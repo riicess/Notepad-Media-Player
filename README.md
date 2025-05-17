@@ -2,13 +2,16 @@
 
 Ever thought your trusty Windows Notepad could play videos or show pictures? Well, with this script, it kind of can! This program turns your videos and images into text-art and displays them right inside Notepad
 
+> [!Important]
+> while many people already made it before, i made this myself!\
+> Made with python.
 ## What's Cool About It?
 
-*   **Videos in Notepad:** Feed it a video file, and watch as Notepad tries its best to "play" it with text frames.
-*   **Show Images in Notepad:** Open an image, and see it transformed into text or block art.
-*   **Choose Your Style:**
-    *   **Clean B&W Blocks:** This is the go-to for a clear, pixelated black and white look. Uses special block characters (`█▓▒░`).
-    *   **Classic Text Art:** Uses a variety of regular text characters to create shades and shapes, like old-school ASCII art.
+*   **Videos in Notepad:** Give it a video file, and Notepad will try its best to play it
+*   **Show Images in Notepad:** Give it a 
+*   **Profiles**
+    *   **Clean B&W Blocks:** pixelated black and white look. Uses special block characters (`█▓▒░`).
+    *   **Classic Text Art:** Uses a variety of regular text characters to create shades and shapes
 *   **Control the Look & Feel:**
     *   **Pre-set Profiles:** Jumpstart with settings for different looks:
         *   `standard_block_bw`: Good quality B&W blocks that are easy to view.
