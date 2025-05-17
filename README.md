@@ -1,78 +1,100 @@
-# Notepad Player: See Videos & Images in Notepad!
-
-Ever thought your trusty Windows Notepad could play videos or show pictures? Well, with this script, it kind of can! This program turns your videos and images into text-art and displays them right inside Notepad
+# Notepad Player: Videos & Images in Notepad!
+This script is a bit of a experiment that turns your Windows Notepad into a makeshift screen for videos, images, and even GIFs It converts them into text-art (or block-art)
 
 > [!Important]
-> while many people already made it before, i made this myself!\
-> Made with python.
-## What's Cool About It?
+> I know, I know, others have probably done similar things. But hey, I built this one myself with Python, and it's been a blast!
 
-*   **Videos in Notepad:** Give it a video file, and Notepad will try its best to play it
-*   **Show Images in Notepad:** Give it a 
-*   **Profiles**
-    *   **Clean B&W Blocks:** pixelated black and white look. Uses special block characters (`█▓▒░`).
-    *   **Classic Text Art:** Uses a variety of regular text characters to create shades and shapes
-*   **Control the Look & Feel:**
-    *   **Pre-set Profiles:** Jumpstart with settings for different looks:
-        *   `standard_block_bw`: Good quality B&W blocks that are easy to view.
-        *   `detailed_block_bw`: Finer B&W blocks. You'll want to zoom out in Notepad for this one!
-        *   `extreme_detail_block_bw`: Super-duper detailed B&W blocks. You'll need to zoom WAAAY out in Notepad (like, a lot!) to see the whole picture.
-        *   `max_fidelity_text_art`: For the most detailed art using regular text characters.
-        *   `balanced_text_art`: A good all-around quality for text-based art.
-    *   **Go Custom:** Want to fine-tune? You can set the art width (how many characters wide), pick the character style, and adjust how it's centered.
-*   **Smart Centering:** The script does its best to center the main part of your image or video frame in Notepad.
-*   **Easy to Use:** Just follow the on-screen prompts to get started.
+It's not gonna replace your VLC player, obviously.
 
-## Super Important Tips!
+## Screenshots
 
-*   **WINDOWS ONLY!** This script needs Windows to talk to Notepad.
-*   **It's an Illusion, Not a Movie Player:** Expect slow, jerky "playback" for videos, especially if you choose high detail. This is for the cool, retro effect!
-*   **ZOOM YOUR NOTEPAD!**
-    *   For the detailed profiles (especially `detailed_block_bw` and `extreme_detail_block_bw`), you **MUST zoom out a lot** in Notepad. Use `Ctrl + Mouse Wheel Down` or go to Notepad's `View > Zoom` menu. Keep zooming out until the picture looks clear and fits your window.
-    *   Experiment with zoom to find what looks best for any setting!
+![image](https://github.com/user-attachments/assets/5c34c6bd-f209-40ff-a201-b8fb40a11725)
 
-## Getting Started
+https://github.com/user-attachments/assets/620824ac-cdf8-48ae-99d1-3f3f6883df47
 
-**1. What You Need:**
-    *   Python 3 (if you don't have it, get it from python.org)
-    *   A Windows computer
 
-**2. Install a Couple of Things:**
-    *   Open your Command Prompt (search for "cmd" in your Start Menu).
-    *   Type these commands one by one, and press Enter after each:
-        ```bash
-        pip install opencv-python
-        pip install pywin32
-        ```
-    *   (If `pip` gives an error, you might need to check if Python was added to your system's PATH when you installed it. Sometimes `py -m pip install ...` works instead.)
 
-**3. Get the Script:**
-    *   Download the `notepad_player.py` file (or whatever you've named it) and save it to a folder on your computer (e.g., `C:\MyCoolScripts`).
 
-**4. Let's Go!**
-    *   **Open Notepad.** A fresh, blank one is perfect.
+
+
+
+## Features
+
+*   **Videos, Images, GIFs:** Chuck a local file at it – `.mp4`, `.jpg`, `.png`, `.gif` – and see what happens.
+*   **Image URLs Too:** Got a direct link to a JPG or PNG? It can try and grab that too.
+*   **Drag and Drop Detection** You can Drag and Drop urls and files.
+*   **Different "Art" Looks (Profiles):**
+    *   **B&W Blocks:** This is usually the best for a clear, pixelated black and white picture using special block characters (`█▓▒░`). Comes in standard, detailed, and *extreme* detail (prepare to zoom!).
+    *   **Dithered B&W Blocks:** A variation of the B&W blocks that uses a dithering technique to try and show more shades. Can look pretty cool!
+    *   **Classic Text Art:** Uses a mix of normal keyboard characters to make the image, like old-school ASCII art.
+*   **Profiles:**
+    *   **Quick Profiles:** Pick a pre-set style and go!
+    *   **Go Custom:** If you're feeling adventurous, you can control:
+        *   How wide the art is (in characters).
+        *   The character set or block style used.
+        *   How the art is centered.
+        *   *Content Cropping:* Decide if you want to "zoom in" on the main subject of a sparse image or show the whole original frame scaled down.
+*   **Smart Centering:** Tries to put the art in the middle of your Notepad window.
+*   **Drag and Drop:** In the menu, choose the "Dropped File/URL" option, then drag a file from Explorer (or an image URL from your browser) onto the black console window, press Enter, and it'll try to process it! You still get to pick the style.
+*   **Easy Menu:** It's all run from the command line with simple numbered choices.
+
+## Heads Up! - Super Important Tips
+
+*   **WINDOWS ONLY!** this uses Windows to control Notepad.
+*   **ZOOM YOUR NOTEPAD!** This is the **BIG ONE**.
+    *   For any of the "detailed" or "extreme" profiles, you **HAVE TO ZOOM OUT A LOT** in Notepad. Like, way out. Use `Ctrl + Mouse Wheel Down` or Notepad's `View > Zoom` menu. Keep going until the picture actually looks like something and fits.
+    *   Play around with Notepad's zoom for *any* setting to get the best look. What the script *sends* and what Notepad *shows* at different zoom levels can be very different.
+*   **Font Choice in Notepad:** The B&W block styles usually look best with standard monospaced fonts like `Consolas` or `Courier New` (check Notepad's `Format > Font...` menu).
+
+## Setup
+
+**1. Stuff You Need:**
+    *   Python 3 (from python.org if you don't have it).
+    *   A Windows computer.
+
+**2. Install Some Python Dependencies**
+    *   Open your Command Prompt (search "cmd" in your Start Menu).
+    *   Type these commands one by one, and hit Enter after each:
+      ```
+        pip install opencv-python,
+        pip install pywin32,
+        pip install requests
+      ```
+    *   *(If `pip` isn't working, you might need to make sure Python was added to your system PATH during its installation, or sometimes `py -m pip install ...` does the trick).*
+
+**3. Grab the Script:**
+    *   Download the `notepad_player.py` file (or whatever it's called).
+    *   Or you can download the exe and start it there, you still need to download dependency libraries.
+    *   Stick it in a folder somewhere easy to find, like `C:\NotepadPlayer`.
+
+**4. Let's Fire It Up!**
+    *   **Open Notepad.**
     *   **Go back to your Command Prompt.**
-    *   Use the `cd` command to go to the folder where you saved the script. For example:
-        ```bash
-        cd C:\MyCoolScripts
+    *   Use the `cd` command to go to the folder where you put the script. For example:
         ```
-    *   Now, run the script by typing:
-        ```bash
+        cd C:\NotepadFun
+        ```
+    *   Run the script by typing:
+        ```
         python notepad_player.py
         ```
-    *   The script will start asking you questions. Just follow the prompts, pick your video or image, and choose your settings. Remember to adjust Notepad's zoom!
+     * Or just run the .exe
+    *   The script will start talking to you with on-screen prompts. Just follow along. And don't forget to play with Notepad's zoom!
 
-## Using the Script
+## Using the Player
 
-1.  **First Choice:** Tell the script if you want to "play" a video or "show" an image.
-2.  **Find Your File:** Give the script the full path to your video or image file (like `C:\Users\YourName\Pictures\cat.jpg`).
-3.  **Notepad's Name:** Usually, "Untitled - Notepad" is fine. If your Notepad window has a different title (like "notes.txt - Notepad"), type that in.
-4.  **Pick a Style (Profile):** Choose one of the cool pre-set art styles, or pick "custom" to tweak everything yourself.
-5.  **Look at Notepad!** The magic (or, well, the text) will appear there.
+1.  **Pick Your Format** Choose if you're playing a video, showing an image from a file, an image from a URL, or using the drag-and-drop option.
+2.  **Point to Your File/URL:**
+    *   If it's a file, give the full path (like `C:\MyStuff\Videos\epic_cat_video.mp4`).
+    *   If drag-and-drop, drag it onto the console when prompted and hit Enter.
+3.  **Tell it Your Notepad's Name:** "Untitled - Notepad" usually works. If yours is different (like "my_masterpiece.txt - Notepad"), type that in.
+4.  **Choose the Art Style (Profile):** Pick a pre-made style or go "custom" to get into the nitty-gritty.
+5.  **Content Scaling:** Decide if you want the script to try and "crop" to the main subject of your image/video before turning it into art (good for making small things bigger) or if you want to use the whole original frame.
+6.  **Watch Notepad!** The texty, blocky art will show up there.
 
-After it's done, the script will ask if you want to:
-*   **Retry:** Play/show the same thing again.
-*   **New:** Pick a different file or change settings.
-*   **Close:** Exit the script.
+When it's done, it'll ask if you want to:
+*   **Retry:** Run the same thing again.
+*   **New:** Choose a different file or mess with the settings.
+*   **Close:** Shut it down.
 
-Have a blast making your Notepad do things it never thought it could!
+Have fun!
