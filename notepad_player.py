@@ -36,7 +36,7 @@ DEFAULT_NOTEPAD_TITLE = "Untitled - Notepad"
 DEFAULT_CANVAS_WIDTH = 160
 DEFAULT_GIF_FRAME_SKIP = 1
 
-def get_notepad_handle(title): # ... (unchanged)
+def get_notepad_handle(title):
     try:
         hwnd = win32gui.FindWindow(None, title)
         if hwnd == 0: print(f"Notepad '{title}' not found."); return None
@@ -45,7 +45,7 @@ def get_notepad_handle(title): # ... (unchanged)
         return edit_hwnd
     except Exception as e: print(f"Find Notepad Error: {e}"); return None
 
-def floyd_steinberg_dither(image_gray): # ... (unchanged)
+def floyd_steinberg_dither(image_gray):
     dither_palette_chars = ['█', '▓', '▒', '░', ' '] 
     dither_palette_values = np.linspace(0, 255, len(dither_palette_chars), dtype=np.float32)
     img_dithered = image_gray.astype(np.float32)
@@ -70,7 +70,7 @@ def floyd_steinberg_dither(image_gray): # ... (unchanged)
 
 def convert_image_to_art(original_image_frame, target_art_width, char_style_name, 
                          char_aspect_ratio_for_font, canvas_width_for_centering=0, 
-                         crop_to_content=True): # ... (unchanged)
+                         crop_to_content=True):
     if original_image_frame is None: print("convert_image_to_art: null image_frame."); return ""
     image_to_process = original_image_frame
     if crop_to_content:
@@ -109,7 +109,7 @@ def convert_image_to_art(original_image_frame, target_art_width, char_style_name
         return "\n".join(padded_lines)
     else: return "\n".join(art_lines)
 
-def get_choice(prompt, options, allow_empty_default=None, default_val_key=None): # ... (unchanged)
+def get_choice(prompt, options, allow_empty_default=None, default_val_key=None):
     print(prompt)
     keys = list(options.keys()) if isinstance(options, dict) else options
     display_names = [options[k] for k in keys] if isinstance(options, dict) else options
@@ -125,7 +125,7 @@ def get_choice(prompt, options, allow_empty_default=None, default_val_key=None):
             else: print("Invalid selection number.")
         except ValueError: print("Invalid input. Number expected.")
 
-def get_int(prompt, default, min_val=None, max_val=None): # ... (unchanged)
+def get_int(prompt, default, min_val=None, max_val=None):
     while True:
         inp = input(f"{prompt} (default: {default}): ")
         if not inp: return default
@@ -137,7 +137,7 @@ def get_int(prompt, default, min_val=None, max_val=None): # ... (unchanged)
             return val
         except ValueError: print("Invalid integer.")
 
-def get_float(prompt, default, min_val=None, max_val=None): # ... (unchanged)
+def get_float(prompt, default, min_val=None, max_val=None):
     while True:
         inp = input(f"{prompt} (default: {default}): ")
         if not inp: return default
@@ -149,7 +149,7 @@ def get_float(prompt, default, min_val=None, max_val=None): # ... (unchanged)
             return val
         except ValueError: print("Invalid float.")
 
-def get_bool_input(prompt_text, default_val_bool): # ... (unchanged)
+def get_bool_input(prompt_text, default_val_bool):
     default_display = "yes" if default_val_bool else "no"
     while True:
         val_str = input(f"{prompt_text} (yes/no, default: {default_display}): ").lower()
@@ -158,7 +158,7 @@ def get_bool_input(prompt_text, default_val_bool): # ... (unchanged)
         if val_str in ["no", "n"]: return False
         print("Invalid input. Please enter 'yes' or 'no'.")
 
-def get_config(media_type="video", source_type="file", pre_filled_path_or_url=None): # ... (unchanged)
+def get_config(media_type="video", source_type="file", pre_filled_path_or_url=None):
     print(f"\n--- New {media_type.capitalize()} from {source_type.capitalize()} Setup ---")
     path_or_url = pre_filled_path_or_url
     if path_or_url is None:
@@ -204,7 +204,7 @@ def get_config(media_type="video", source_type="file", pre_filled_path_or_url=No
         cfg["art_style"] = get_choice("Art style/character set", style_disp, True, cfg["art_style"])
         cfg["char_aspect"] = get_float(f"Char aspect (default: {cfg['char_aspect']})", cfg["char_aspect"], 0.1, 1.0)
         cfg["center_canvas_width"] = get_int(f"Center canvas (0=none, default: {cfg['center_canvas_width']})", cfg["center_canvas_width"], 0)
-    if media_type == "video": # Set delay for video after profile/custom, ensures it's there
+    if media_type == "video":
         cfg["delay"] = get_float(f"Video/GIF delay (s) (default: {cfg.get('delay', DEFAULT_VIDEO_DELAY_S)})", cfg.get("delay", DEFAULT_VIDEO_DELAY_S), 0.01)
         if path_or_url.lower().endswith(".gif"):
             print("\n--- GIF Playback Options ---")
@@ -218,7 +218,7 @@ def get_config(media_type="video", source_type="file", pre_filled_path_or_url=No
     cfg["crop_to_content"] = True if crop_choice == "yes_crop" else False
     return cfg
 
-def display_art_in_notepad_static(config, art_string): # ... (unchanged)
+def display_art_in_notepad_static(config, art_string):
     print("\n  DISPLAYING STATIC ART:")
     print("    ADVICE: Zoom Notepad In/Out (Ctrl+MouseWheel) until art looks clear and fits well.")
     if config.get('center_canvas_width', 0) > 0 : print(f"    Art content centered in canvas of {config.get('center_canvas_width',0)} chars if wider.")
@@ -236,7 +236,7 @@ def display_art_in_notepad_static(config, art_string): # ... (unchanged)
         else: print(f"\n  Error sending art: {e}")
         return False
 
-def fetch_image_from_url(url): # ... (unchanged)
+def fetch_image_from_url(url):
     print(f"  Fetching image from URL: {url}")
     try:
         response = requests.get(url, stream=True, timeout=15)
@@ -249,7 +249,7 @@ def fetch_image_from_url(url): # ... (unchanged)
     except requests.exceptions.RequestException as e: print(f"  URL fetch Error: {e}"); return None
     except Exception as e: print(f"  Image URL processing Error: {e}"); return None
 
-def display_single_media(config): # ... (unchanged)
+def display_single_media(config):
     print(f"\n--- Processing Single {config['media_type'].capitalize()}: {config['file_path']} ---")
     image_data = None
     if config["source_type"] == "file":
@@ -269,14 +269,13 @@ def display_single_media(config): # ... (unchanged)
 
 def play_video(config):
     print("\n--- Video Playback ---")
-    # ... (print config details) ...
     for k,v in config.items(): print(f"  {k.replace('_',' ').capitalize()}: {v}")
     print(f"  Art Style: '{config['art_style']}' ({len(CHAR_STYLES[config['art_style']])} chars)")
     print(f"\n  ADVICE: Zoom Notepad In/Out until video looks clear and fits well.")
     if config.get('width',0) > 180: print("  WARNING: Video Art Width > 180 is very slow!")
 
     edit_hwnd = get_notepad_handle(config["notepad_title"])
-    if not edit_hwnd: print("  Notepad window not found."); return False
+    if not edit_hwnd: print("Notepad window not found."); return False
     
     cap = None; video_source = config["file_path"]
     is_gif = video_source.lower().endswith(".gif")
@@ -301,14 +300,14 @@ def play_video(config):
         if frame_skip > 1: print(f"  GIF Frame Skip: Processing 1 of every {frame_skip} frames")
     print("  Ctrl+C in console to stop.")
     
-    gif_art_cache = [] # For storing pre-rendered GIF frames if looping
-    processed_gif_once = False # Flag to indicate if the first pass of GIF processing is done
+    gif_art_cache = [] # pmo
+    processed_gif_once = False
 
     frame_num_processed = 0; frame_num_read = 0
     proc_start_time = time.time(); video_done = False; op_success = True
     
     try:
-        while True: # Overall playback loop (allows for multiple passes if looping GIF from cache)
+        while True: 
             if is_gif and loop_this_gif and processed_gif_once and gif_art_cache:
                 # Loop from cache
                 print("  Looping GIF from cache...")
@@ -316,33 +315,29 @@ def play_video(config):
                     if not win32gui.IsWindow(edit_hwnd): print("\n  Notepad closed."); op_success = False; break
                     try: win32gui.SendMessage(edit_hwnd, win32con.WM_SETTEXT, 0, art_str)
                     except Exception as e: print(f"\n  Error sending cached text: {e}"); op_success=False; break
-                    time.sleep(config.get("delay", DEFAULT_VIDEO_DELAY_S)) # Use configured delay
-                    frame_num_processed +=1 # Count these as processed too for FPS
-                    if frame_num_processed % (10 * (len(gif_art_cache) // 10 or 1) ) == 0: # Log less frequently for cached loops
+                    time.sleep(config.get("delay", DEFAULT_VIDEO_DELAY_S))
+                    frame_num_processed +=1
+                    if frame_num_processed % (10 * (len(gif_art_cache) // 10 or 1) ) == 0:
                          print(f"  Cached Loop Frame: {frame_num_processed}")
-                if not op_success: break # Break outer loop if error during cache playback
-                # If loop completes successfully, it will just restart this outer while True again.
-                # Ctrl+C will break out via KeyboardInterrupt.
-                time.sleep(0.1) # Small pause before restarting cached loop
-                continue # Restart cached loop
+                if not op_success: break
+                time.sleep(0.1)
+                continue 
 
-            # --- First pass for GIF, or regular video/non-looping GIF ---
             frame_num_read_this_pass = 0
-            cap.set(cv2.CAP_PROP_POS_FRAMES, 0) # Ensure we start from the beginning for first pass or non-cached loop
-            if is_gif and loop_this_gif and not processed_gif_once: gif_art_cache = [] # Clear cache for new first pass
+            cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            if is_gif and loop_this_gif and not processed_gif_once: gif_art_cache = []
 
-            while True: # Frame reading/processing loop
+            while True:
                 ret, frame = cap.read()
                 frame_num_read += 1
                 frame_num_read_this_pass +=1
                 if not ret: 
                     if is_gif and loop_this_gif:
-                        processed_gif_once = True # Mark first pass complete
-                        # print("  GIF end of frames, will loop from cache or re-process if cache empty.")
-                        break # Break inner frame reading, outer loop will handle cache or restart
+                        processed_gif_once = True
+                        break
                     else: video_done = True; print("\n  End of video/gif."); break
                 
-                if frame_skip > 1 and ((frame_num_read_this_pass -1) % frame_skip != 0): # Process 1st, (1+N)th, (1+2N)th etc.
+                if frame_skip > 1 and ((frame_num_read_this_pass -1) % frame_skip != 0):
                     continue 
 
                 current_frame_start_time = time.time()
@@ -352,7 +347,7 @@ def play_video(config):
                 if not art_str: time.sleep(config["delay"]); continue
 
                 if is_gif and loop_this_gif and not processed_gif_once:
-                    gif_art_cache.append(art_str) # Cache the art
+                    gif_art_cache.append(art_str)
 
                 try: win32gui.SendMessage(edit_hwnd, win32con.WM_SETTEXT, 0, art_str)
                 except Exception as e:
@@ -370,9 +365,8 @@ def play_video(config):
                     lines=art_str.split('\n'); h=len(lines); w_sent=len(lines[0]) if h>0 else 0
                     print(f"  Frame:{frame_num_processed}(read:{frame_num_read}), Sent:{w_sent}x{h} (ContentW:{config['width']}), ProcT:{frame_proc_time:.3f}s, AvgFPS:{current_avg_fps:.1f}")
             
-            if video_done or not op_success: break # Break outer playback loop
-            # If it's a looping GIF and first pass is done, outer loop will continue and use cache.
-
+            if video_done or not op_success: 
+            break 
     except KeyboardInterrupt: print("\n  Playback stopped."); op_success = False
     except Exception as e: print(f"\n  PLAYBACK ERROR: {e}"); traceback.print_exc(); op_success = False
     finally:
@@ -384,7 +378,7 @@ def play_video(config):
         return op_success or video_done
 
 
-def process_dropped_input_and_get_config(dropped_text, current_notepad_title=None): # ... (unchanged)
+def process_dropped_input_and_get_config(dropped_text, current_notepad_title=None):
     print(f"\n--- Processing Dropped Item: '{dropped_text[:100]}{'...' if len(dropped_text)>100 else ''}' ---")
     path_or_url = dropped_text.strip().strip('"')
     source_type = ""; media_type = ""
@@ -403,7 +397,7 @@ def process_dropped_input_and_get_config(dropped_text, current_notepad_title=Non
     return get_config(media_type=media_type, source_type=source_type, pre_filled_path_or_url=path_or_url)
 
 
-def main(): # ... (unchanged)
+def main():
     last_cfg = None; first_run = True
     current_notepad_title_for_drag_drop = DEFAULT_NOTEPAD_TITLE
     while True:
