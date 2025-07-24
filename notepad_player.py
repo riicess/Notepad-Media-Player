@@ -1,4 +1,4 @@
-# rat!!!!
+# omg is this a rat!!!!
 
 import cv2
 import numpy as np
